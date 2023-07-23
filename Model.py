@@ -53,7 +53,6 @@ class Detector:
 
 		#Checking face detection
 		if not faceBoxes:
-			print('Faces not found')
 			return
 
 		#Showing faces in photo
