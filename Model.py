@@ -1,5 +1,5 @@
 import cv2
-import matplotlib.pyplot as plt
+import os
 
 class Detector:
 
@@ -24,9 +24,12 @@ class Detector:
 		self.gen_categories = ['Male','Female']
 
 
-	def work_with_image(self,input_image):
+	def show_face(self,input_data):
 		#Get image
-		image = cv2.cvtColor(cv2.imread(input_image),cv2.COLOR_BGR2RGB)
+		try:
+			image = cv2.cvtColor(cv2.imread(input_data),cv2.COLOR_BGR2RGB)
+		except:
+			image = input_data
 		h = image.shape[0]
 		w = image.shape[1]
 
@@ -51,6 +54,7 @@ class Detector:
 		#Checking face detection
 		if not faceBoxes:
 			print('Faces not found')
+			return
 
 		#Showing faces in photo
 		for faceBox in faceBoxes:
@@ -81,7 +85,4 @@ class Detector:
 						(255,255,255),
 						2,
 						cv2.LINE_AA)
-
-			plt.figure(figsize=(12,8))
-			plt.imshow(image)
-			plt.show()
+			return image
